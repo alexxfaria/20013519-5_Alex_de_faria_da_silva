@@ -19,24 +19,24 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="./index.php">Inicio</a></li>
-                        <li><a href="./pages/about.php">Quem somos?</a></li>
-                        <li><a href="./pages/contato.php">Contato</a></li>
-                        <li><a href="./pages/localiza.php">Localizacao</a></li>
+                        <li><a href="index.php?pagina=./pages/about.php">Quem somos?</a></li>
+                        <li><a href="index.php?pagina=./pages/contato.php">Contato</a></li>
+                        <li><a href="index.php?pagina=./pages/localiza.php">Localizacao</a></li>
                     </ul>
                 </div>
             </div>
         </nav>
+        <main>
+            <?php
+                if (isset($_GET["pagina"]) && !empty($_GET["pagina"])) {
+                    $pagina=$_GET["pagina"];
+                    include ($pagina);
+                } else {
+                    echo "Pagina principal";
+                }?>
+        </main>
 
-        <div class="container">
-
-            <?php require "./pages/about.php";  ?>
-            <?php require "./pages/contato.php";  ?>
-            <?php require "./pages/localiza.php";  ?>
-
-
-        </div>
-
-            <hr>
+              <hr>
 
             <footer>
                 <p>© Alex Faria 2021</p>
