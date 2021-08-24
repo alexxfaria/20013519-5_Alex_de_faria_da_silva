@@ -4,43 +4,67 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docemania</title>
+    <title>DoceMania</title>
 
 
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link rel="stylesheet" href="./css/geral.css">
+
+    
+    <?php
+        include('./dados/dados.php');
+    ?>
 </head>
 <body>
    <nav id="header" class="navbar navbar-fixed-top">
-            <div id="header-container" class="container navbar-container">
-                <div class="navbar-header">
-                    <a id="brand" class="navbar-brand" href="./index.php">Docemania</a>
-                </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="./index.php">Inicio</a></li>
-                        <li><a href="index.php?pagina=./pages/about.php">Quem somos?</a></li>
-                        <li><a href="index.php?pagina=./pages/contato.php">Contato</a></li>
-                        <li><a href="index.php?pagina=./pages/localiza.php">Localizacao</a></li>
-                    </ul>
-                </div>
+        <div id="header-container" class="container navbar-container">
+            <div class="navbar-header">
+                <a id="brand" class="navbar-brand" href="./index.php">DoceMania</a>
             </div>
-        </nav>
-        <main>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="./index.php">Inicio</a></li>
+                    <li><a href="index.php?pagina=./pages/about.php">Quem somos?</a></li>
+                    <li><a href="index.php?pagina=./pages/contato.php">Contato</a></li>
+                    <li><a href="index.php?pagina=./pages/localiza.php">Localizacao</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <main class="container-fluid">
+        <?php
+            if (isset($_GET["pagina"]) && !empty($_GET["pagina"])) {
+                $pagina = $_GET["pagina"];
+                include($pagina);
+            } else { 
+                
+            foreach($produto as $key => $value) {
+        ?>
+                    
+                    <div class="col-sm-2 col-md-3">
+                        <div class="thumbnail">
+                        <img style="max-width: 200px" src="<?= $value["imgSrc"] ?>" alt="<?= $key ?>">
+                        <div class="caption text-center">
+                            <h3><?= $value["descricao"] ?></h3>
+                            <p> Valor: R$<?= $value["preco"] ?> </p>
+                            <p>
+                                <a href="index.php?pagina=./pages/produto.php&prod=<?=$key?>" class="btn btn-success" role="button">DETALHES</a> 
+                            </p>
+                        </div>
+                        </div>
+                    </div>
             <?php
-                if (isset($_GET["pagina"]) && !empty($_GET["pagina"])) {
-                    $pagina=$_GET["pagina"];
-                    include ($pagina);
-                } else {
-                    echo "Pagina principal";
-                }?>
-        </main>
+                }  
+                    } 
+            ?>
+    </main>
 
-              <hr>
+     <div class="row"></div>               
+    <hr>
 
-            <footer>
-                <p>© Alex Faria 2021</p>
-            </footer> 
+    <footer>
+        <p>by Alex de Faria da Silva | 2021</p>
+    </footer> 
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
